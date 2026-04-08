@@ -12,7 +12,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8080/api/processes/instances");
+        const { data } = await axios.get("https://activiti-process-ai-model.onrender.com/api/processes/instances");
         setStats([
           { name: 'Active Instances', count: data.length },
           { name: 'Completed', count: 12 }, // Simulated
