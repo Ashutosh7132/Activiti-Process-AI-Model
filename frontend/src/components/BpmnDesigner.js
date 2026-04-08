@@ -59,7 +59,7 @@ const BpmnDesigner = () => {
 
     setIsDeploying(true);
     try {
-      const response = await axios.post(`http://localhost:8080/api/ai/generate`, { prompt });
+      const response = await axios.post(`/api/ai/generate`, { prompt });
       const xml = response.data;
       await modelerRef.current.importXML(xml);
       alert("AI has generated your process!");
