@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Sparkles, UploadCloud } from 'lucide-react';
 
 // Use relative path for production (Docker integrated build)
-const API_BASE = "/api/processes";
+const API_BASE = "https://activiti-process-ai-model.onrender.com/api/processes";
 
 const BpmnDesigner = () => {
   const containerRef = useRef(null);
@@ -55,24 +55,24 @@ const BpmnDesigner = () => {
     return () => modeler.destroy(); 
   }, [initialDiagram]); 
 
-  const handleAiGenerate = async () => { 
-    if (!prompt) return alert("Please describe your process first!"); 
+  // --- AND Update handleAiGenerate inside the component ---
+const handleAiGenerate = async () => { 
+  if (!prompt) return alert("Please describe your process first!"); 
 
-    setIsDeploying(true); 
-    try { 
-      // Call the backend AI endpoint
-      const response = await axios.post(`/api/ai/generate`, { prompt }); 
-      const xml = response.data; 
-      await modelerRef.current.importXML(xml); 
-      alert("AI has generated your process!"); 
-    } catch (err) { 
-      console.error("AI Error:", err); 
-      alert("AI generation failed. Is the backend running?"); 
-    } finally { 
-      setIsDeploying(false); 
-    } 
-  }; 
-
+  setIsDeploying(true); 
+  try { 
+    // Use the absolute URL here too
+    const response = await axios.post(`https://activiti-process-ai-model.onrender.com/api/ai/generate`, { prompt }); 
+    const xml = response.data; 
+    await modelerRef.current.importXML(xml); 
+    alert("AI has generated your process!"); 
+  } catch (err) { 
+    console.error("AI Error:", err); 
+    alert("AI generation failed. Is the backend running?"); 
+  } finally { 
+    setIsDeploying(false); 
+  } 
+};
   const handleDeploy = useCallback(async () => { 
     if (!modelerRef.current) return; 
     setIsDeploying(true); 
