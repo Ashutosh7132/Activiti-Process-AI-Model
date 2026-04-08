@@ -1,5 +1,3 @@
-"# Activiti-Process-AI-Model" 
-
 ### Project Overview: Activiti AI Process Suite
 This project is a comprehensive Enterprise Business Process Management (BPMN) Platform that combines visual process modeling, artificial intelligence, and real-time analytics into a single cloud-native application.
 
